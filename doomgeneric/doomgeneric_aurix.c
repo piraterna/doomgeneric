@@ -100,9 +100,11 @@ void DG_Init()
 
 void DG_DrawFrame()
 {
-  write(framebuffer, DG_ScreenBuffer, DOOMGENERIC_RESX * DOOMGENERIC_RESY);
+	lseek(framebuffer, 0, SEEK_SET);
+	write(framebuffer, DG_ScreenBuffer,
+		  DOOMGENERIC_RESX * DOOMGENERIC_RESY * sizeof(*DG_ScreenBuffer));
 
-  handleKeyInput();
+	handleKeyInput();
 }
 
 void DG_SleepMs(uint32_t ms)
